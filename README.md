@@ -38,13 +38,13 @@ comment bodies are omitted.
 Install from npm on Paseo 0.9.0 or newer:
 
 ```sh
-paseo plugin install npm:paseo-graphite@0.2.0
+paseo plugin install npm:paseo-graphite
 ```
 
 Paseo 0.8 can install the same plugin from Git:
 
 ```sh
-paseo plugin add tomgrin10/paseo-graphite --ref v0.2.0
+paseo plugin add tomgrin10/paseo-graphite
 ```
 
 ## Develop
