@@ -1,10 +1,12 @@
-import type { PaseoApi } from "@getpaseo/client";
+import type { PluginHandlerContext } from "@getpaseo/plugin/server";
 import type {
   AttentionReason,
   StackBranch,
   StackSnapshot,
 } from "../shared/contracts";
 import { findBinary, runCommand, stripAnsi } from "./process";
+
+type PaseoApi = PluginHandlerContext["paseo"];
 
 const CACHE_MS = 30_000;
 const MAX_CACHE_ENTRIES = 128;

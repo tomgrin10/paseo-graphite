@@ -1,4 +1,3 @@
-import type { PaseoApi } from "@getpaseo/client";
 import { type PluginSurfaceProps, usePaseo, useRpc } from "@getpaseo/plugin/client";
 import { Icon } from "@getpaseo/plugin/client/react-native";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -12,6 +11,8 @@ import {
 } from "../shared/contracts";
 import { CompactPrRow } from "./pr-row";
 import { publishStack, stackQueryKey } from "./status";
+
+type PaseoApi = ReturnType<typeof usePaseo>;
 
 const centerQueryKey = ["paseo-graphite", "center", "client-scan-v2"] as const;
 const SCAN_CONCURRENCY = 1;

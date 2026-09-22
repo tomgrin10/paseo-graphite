@@ -1,5 +1,8 @@
-import type { PaseoApi, PaseoAgent } from "@getpaseo/client";
+import type { PluginClientContext } from "@getpaseo/plugin/client";
 import type { StackSnapshot } from "../shared/contracts";
+
+type PaseoApi = PluginClientContext["paseo"];
+type PaseoAgent = Awaited<ReturnType<PaseoApi["agents"]["list"]>>["entries"][number]["agent"];
 
 function providerSelection(agent: PaseoAgent): string {
   if (!agent.model || agent.provider.includes("/")) return agent.provider;
