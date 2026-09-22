@@ -1,7 +1,7 @@
 {
   "name": "paseo-graphite",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "description": "Workspace-native Graphite stack status and PR action radar for Paseo.",
   "repository": {
@@ -11,7 +11,13 @@
   "homepage": "https://github.com/tomgrin10/paseo-graphite#readme",
   "bugs": "https://github.com/tomgrin10/paseo-graphite/issues",
   "author": "Tom Gringauz",
-  "keywords": ["paseo", "paseo-plugin", "graphite", "github", "pull-requests"],
+  "keywords": [
+    "paseo",
+    "paseo-plugin",
+    "graphite",
+    "github",
+    "pull-requests"
+  ],
   "files": [
     "paseo-plugin.json",
     "index.client.tsx",
