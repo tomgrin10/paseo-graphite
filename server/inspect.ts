@@ -26,7 +26,7 @@ function enqueueInspection(work: () => Promise<StackSnapshot>): Promise<StackSna
 
 type JsonObject = Record<string, unknown>;
 
-interface LocalBranch {
+export interface LocalBranch {
   branch: string;
   current: boolean;
   localStatus: string | null;
@@ -39,7 +39,7 @@ interface LocalBranch {
   graphiteTitle: string | null;
 }
 
-interface GithubPr {
+export interface GithubPr {
   number: number;
   title: string;
   url: string;
@@ -301,9 +301,35 @@ export function parseGithubPr(payload: unknown): { viewer: string | null; pr: Gi
   };
 }
 
-function attention(local: LocalBranch, pr: GithubPr | null): StackBranch["attention"] {
+function actionAttention(reasons: AttentionReason[]): StackBranch["attention"] {
+  const label = reasons.includes("merge-conflict")
+    ? "Resolve merge conflict"
+    : reasons.includes("review-comments") || reasons.includes("changes-requested")
+      ? "Fix review feedback"
+      : reasons.includes("checks-failed")
+        ? "Fix failing checks"
+        : reasons.includes("needs-restack")
+          ? "Restack and submit"
+          : reasons.includes("remote-newer")
+            ? "Get remote changes"
+            : reasons.includes("submit-required")
+              ? "Submit this stack"
+              : "Publish for review";
+  return {
+    level: "action",
+    reasons,
+    label,
+    command:
+      reasons.includes("review-comments") || reasons.includes("changes-requested")
+        ? "/fix-pr"
+        : null,
+  };
+}
+
+export function attention(local: LocalBranch, pr: GithubPr | null): StackBranch["attention"] {
   const reasons: AttentionReason[] = [];
   const localState = `${local.localStatus ?? ""} ${local.remoteStatus ?? ""}`.toLowerCase();
+  const graphitePrStatus = local.graphitePrStatus?.toLowerCase() ?? "";
 
   if (pr === null) reasons.push("submit-required");
   if (pr?.state === "MERGED" || localState.includes("merged")) {
@@ -318,34 +344,18 @@ function attention(local: LocalBranch, pr: GithubPr | null): StackBranch["attent
   if (pr && pr.unresolvedThreads > 0) reasons.push("review-comments");
   if (pr?.reviewDecision === "CHANGES_REQUESTED") reasons.push("changes-requested");
   if (pr && pr.checks.requiredFailed > 0) reasons.push("checks-failed");
-  if (localState.includes("needs restack")) {
-    reasons.push("needs-restack");
-  }
-  if (localState.includes("need get") || localState.includes("remote at")) reasons.push("remote-newer");
   if (pr?.isDraft) reasons.push("publish-required");
 
   if (reasons.length > 0) {
-    const label = reasons.includes("merge-conflict")
-      ? "Resolve merge conflict"
-      : reasons.includes("review-comments") || reasons.includes("changes-requested")
-        ? "Fix review feedback"
-        : reasons.includes("checks-failed")
-          ? "Fix failing checks"
-          : reasons.includes("needs-restack")
-            ? "Restack and submit"
-            : reasons.includes("remote-newer")
-              ? "Get remote changes"
-              : reasons.includes("submit-required")
-                ? "Submit this stack"
-                : "Publish for review";
+    return actionAttention(reasons);
+  }
+
+  if (graphitePrStatus.startsWith("queued to merge")) {
     return {
-      level: "action",
-      reasons,
-      label,
-      command:
-        pr && (reasons.includes("review-comments") || reasons.includes("changes-requested"))
-          ? "/fix-pr"
-          : null,
+      level: "waiting",
+      reasons: ["merge-queued"],
+      label: "Queued to merge",
+      command: null,
     };
   }
 
@@ -369,7 +379,7 @@ function attention(local: LocalBranch, pr: GithubPr | null): StackBranch["attent
     };
   }
   if (
-    local.graphitePrStatus?.toLowerCase() === "ready to merge" ||
+    graphitePrStatus === "ready to merge" ||
     (pr?.state === "OPEN" &&
       pr.reviewDecision === "APPROVED" &&
       pr.mergeable === "MERGEABLE" &&
@@ -383,6 +393,11 @@ function attention(local: LocalBranch, pr: GithubPr | null): StackBranch["attent
       command: null,
     };
   }
+
+  if (localState.includes("needs restack")) reasons.push("needs-restack");
+  if (localState.includes("need get") || localState.includes("remote at")) reasons.push("remote-newer");
+  if (reasons.length > 0) return actionAttention(reasons);
+
   return { level: "waiting", reasons: [], label: "No action right now", command: null };
 }
 

@@ -15,6 +15,7 @@ export const attentionReasonSchema = z.enum([
   "publish-required",
   "request-review",
   "ready-to-merge",
+  "merge-queued",
   "checks-running",
   "waiting-for-review",
   "merged",
