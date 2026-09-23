@@ -1,7 +1,8 @@
 # paseo-graphite
 
-[![Paseo](https://img.shields.io/badge/Paseo-%E2%89%A5%200.8.0-8A63D2?style=for-the-badge)](https://paseo.sh)
+[![npm version](https://img.shields.io/npm/v/paseo-graphite?style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/paseo-graphite)
 [![npm downloads](https://img.shields.io/npm/dm/paseo-graphite?style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/paseo-graphite)
+[![Paseo](https://img.shields.io/badge/Paseo-%E2%89%A5%200.8.0-8A63D2?style=for-the-badge)](https://paseo.sh)
 [![License](https://img.shields.io/github/license/tomgrin10/paseo-graphite?style=for-the-badge&color=2563eb)](LICENSE)
 
 A trusted local Paseo 0.8 plugin that shows the real Graphite stack for each workspace and tells you
@@ -58,3 +59,11 @@ paseo plugin logs paseo-graphite
 ```
 
 See [PLAN.md](PLAN.md) for the product model and roadmap.
+
+## More Paseo plugins
+
+Also available from [Tom Gringauz](https://github.com/tomgrin10):
+
+- [Defer](https://www.npmjs.com/package/paseo-defer) — Schedule messages to agents for later delivery.
+- [Smart Session](https://www.npmjs.com/package/paseo-smart-session) — Context-aware compaction and usage insights for long-running agents.
+- [Vitals](https://www.npmjs.com/package/paseo-vitals) — Host, Paseo, agent, and Docker health in one dashboard.
