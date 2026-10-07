@@ -2,10 +2,10 @@
 
 [![npm version](https://img.shields.io/npm/v/paseo-graphite?style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/paseo-graphite)
 [![npm downloads](https://img.shields.io/npm/dm/paseo-graphite?style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/paseo-graphite)
-[![Paseo](https://img.shields.io/badge/Paseo-%E2%89%A5%200.8.0-8A63D2?style=for-the-badge)](https://paseo.sh)
+[![Paseo](https://img.shields.io/badge/Paseo-plugin-8A63D2?style=for-the-badge)](https://paseo.sh)
 [![License](https://img.shields.io/github/license/tomgrin10/paseo-graphite?style=for-the-badge&color=2563eb)](LICENSE)
 
-A trusted local Paseo 0.8 plugin that shows the real Graphite stack for each workspace and tells you
+A trusted local Paseo plugin that shows the real Graphite stack for each workspace and tells you
 whether a PR needs action, is ready to merge, is waiting, or is done.
 
 The stack comes from the Graphite CLI in the workspace. GitHub only enriches those Graphite branches
@@ -14,7 +14,7 @@ membership from GitHub PR base branches.
 
 ## Requirements
 
-- Paseo 0.8+
+- The latest Paseo release
 - `git`
 - Graphite CLI (`gt`) initialized in the repository
 - authenticated GitHub CLI (`gh`) for live PR status
@@ -36,16 +36,10 @@ comment bodies are omitted.
 
 ## Install
 
-Install from npm on Paseo 0.9.0 or newer:
+Install from npm using the latest Paseo release:
 
 ```sh
-paseo plugin install npm:paseo-graphite
-```
-
-Paseo 0.8 can install the same plugin from Git:
-
-```sh
-paseo plugin add tomgrin10/paseo-graphite
+paseo plugin install paseo-graphite
 ```
 
 ## Develop
@@ -64,6 +58,7 @@ See [PLAN.md](PLAN.md) for the product model and roadmap.
 
 Also available from [Tom Gringauz](https://github.com/tomgrin10):
 
-- [Defer](https://www.npmjs.com/package/paseo-defer) — Schedule messages to agents for later delivery.
-- [Smart Session](https://www.npmjs.com/package/paseo-smart-session) — Context-aware compaction and usage insights for long-running agents.
-- [Vitals](https://www.npmjs.com/package/paseo-vitals) — Host, Paseo, agent, and Docker health in one dashboard.
+- [Defer](https://github.com/tomgrin10/paseo-defer) — Schedule messages to agents for later delivery.
+- [Smart Session](https://github.com/tomgrin10/paseo-smart-session) — Context-aware compaction and usage insights for long-running agents.
+- [Vitals](https://github.com/tomgrin10/paseo-vitals) — Host, Paseo, agent, and Docker health in one dashboard.
+- [Send to Paseo](https://github.com/tomgrin10/send-to-paseo) — Send GitHub and Graphite PRs to Paseo from Chrome.
