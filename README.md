@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/paseo-graphite?style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/paseo-graphite)
 [![npm downloads](https://img.shields.io/npm/dm/paseo-graphite?style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/paseo-graphite)
-[![Paseo](https://img.shields.io/badge/Paseo-plugin-8A63D2?style=for-the-badge)](https://paseo.sh)
+[![Paseo](https://img.shields.io/badge/Paseo-%E2%89%A5%200.8.0-8A63D2?style=for-the-badge)](https://paseo.sh)
 [![License](https://img.shields.io/github/license/tomgrin10/paseo-graphite?style=for-the-badge&color=2563eb)](LICENSE)
 
 A trusted local Paseo plugin that shows the real Graphite stack for each workspace and tells you
@@ -11,6 +11,14 @@ whether a PR needs action, is ready to merge, is waiting, or is done.
 The stack comes from the Graphite CLI in the workspace. GitHub only enriches those Graphite branches
 with reviews, unresolved threads, checks, and mergeability. The plugin does not infer Graphite
 membership from GitHub PR base branches.
+
+## Install
+
+Install from npm using the latest Paseo release:
+
+```sh
+paseo plugin install paseo-graphite
+```
 
 ## Requirements
 
@@ -34,15 +42,7 @@ The workspace panel is intentionally dense: each PR is a compact row with action
 `resolved/total` review-thread count, check count, and a small Graphite link. GitHub links and
 comment bodies are omitted.
 
-## Install
-
-Install from npm using the latest Paseo release:
-
-```sh
-paseo plugin install paseo-graphite
-```
-
-## Develop
+## Development
 
 ```sh
 npm install
@@ -54,11 +54,17 @@ paseo plugin logs paseo-graphite
 
 See [PLAN.md](PLAN.md) for the product model and roadmap.
 
-## More Paseo plugins
+## License
 
-Also available from [Tom Gringauz](https://github.com/tomgrin10):
+[MIT](LICENSE) © 2026 Tom Gringauz.
 
-- [Defer](https://github.com/tomgrin10/paseo-defer) — Schedule messages to agents for later delivery.
-- [Smart Session](https://github.com/tomgrin10/paseo-smart-session) — Context-aware compaction and usage insights for long-running agents.
-- [Vitals](https://github.com/tomgrin10/paseo-vitals) — Host, Paseo, agent, and Docker health in one dashboard.
+## Other plugins
+
+- [Defer](https://github.com/tomgrin10/paseo-defer) — Schedule messages for later delivery.
+- [Smart Session](https://github.com/tomgrin10/paseo-smart-session) — Context compaction and usage insights.
+- [Vitals](https://github.com/tomgrin10/paseo-vitals) — Host, agent, and Docker health.
+- [Session Guard](https://github.com/tomgrin10/paseo-session-guard) — Pause at session limits and continue after reset.
+- [Transfer](https://github.com/tomgrin10/paseo-transfer) — Copy or move workspaces between hosts.
+- [Transcript Search](https://github.com/tomgrin10/paseo-transcript-search) — Search conversations across connected hosts.
 - [Send to Paseo](https://github.com/tomgrin10/send-to-paseo) — Send GitHub and Graphite PRs to Paseo from Chrome.
+- [Dispatch](https://github.com/tomgrin10/paseo-dispatch) — Route tasks to existing workspaces (development preview).
