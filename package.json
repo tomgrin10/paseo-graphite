@@ -25,16 +25,18 @@
     "client/",
     "server/",
     "shared/",
-    "PLAN.md"
+    "PLAN.md",
+    "OVERVIEW.md",
+    "docs/screenshots/"
   ],
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "node --import ./test-register.mjs --test --experimental-strip-types server/*.test.ts",
-    "verify": "npm run typecheck && npm test"
+    "verify": "npm run typecheck && npm test && node --test button-visibility.test.mjs"
   },
   "devDependencies": {
-    "@getpaseo/client": "0.8.0",
-    "@getpaseo/plugin": "0.8.0",
+    "@getpaseo/client": "0.11.0",
+    "@getpaseo/plugin": "0.11.0",
     "@tanstack/react-query": "^5.90.11",
     "@types/node": "^22.10.2",
     "@types/react": "~19.2.0",
