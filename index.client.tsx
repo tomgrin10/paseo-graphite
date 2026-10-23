@@ -1,3 +1,6 @@
+import { withButtonVisibility } from "./client/button-visibility";
+import { contributeDisplay } from "./client/display";
+import { withNavigation } from "./client/navigation";
 import type {
   PluginButtonRegistration,
   PluginClientContext,
@@ -11,9 +14,11 @@ import {
   subscribeStack,
 } from "./client/status";
 
-export default function contribute(client: PluginClientContext) {
-  client.addSurface("graphite-prs", GraphitePrCenter);
-  client.addSidebarItem({
+export default function contribute(host: PluginClientContext) {
+  const visibility = withButtonVisibility(host);
+  const client = visibility.client;
+  client.addSurface("graphite-prs", withNavigation(GraphitePrCenter, client, "graphite-prs"));
+  const removeDisplay = contributeDisplay(client, {
     id: "graphite-prs",
     title: "Graphite PRs",
     icon: "GitPullRequest",
@@ -37,7 +42,7 @@ export default function contribute(client: PluginClientContext) {
     icon: "GitPullRequest",
     context: "workspace",
     locations: ["explorer"],
-    Component: GraphiteStackPanel,
+    Component: withNavigation(GraphiteStackPanel, client, "graphite-prs"),
   });
 
   client.addCommandCenterItem({
@@ -158,6 +163,7 @@ export default function contribute(client: PluginClientContext) {
     });
 
   return () => {
+    visibility.dispose();
     stopped = true;
     unsubscribeWorkspaces();
     unsubscribeAgents();
