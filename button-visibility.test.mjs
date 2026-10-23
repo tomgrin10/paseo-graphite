@@ -40,3 +40,15 @@ test("hidden buttons preserve current descriptors, cover newly discovered worksp
   f.save({ [flag]: true });
   assert.equal(f.active.size, 0, "late preference changes cannot resurrect disposed buttons");
 });
+
+test("header and composer preferences remain independent", () => {
+  const f = fixture();
+  const button = { title: "Open", icon: "Settings", behavior: { kind: "action", onPress() {} } };
+  f.client.addHeaderButton({ id: "header", workspaceId: "workspace", button });
+  f.client.addComposerPill({ id: "composer", workspaceId: "workspace", agentId: "agent", button });
+  f.save({ enable_header_button: false });
+  assert.deepEqual([...f.active.keys()], ["composer"]);
+  f.save({ enable_composer_button: false });
+  assert.deepEqual([...f.active.keys()], ["header"]);
+  f.dispose();
+});
