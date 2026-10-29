@@ -6,7 +6,7 @@ Setup:
 
 - `git` and the Graphite CLI (`gt`) on the daemon host, with Graphite initialized in the repository.
 - An authenticated GitHub CLI (`gh`) for live pull request status.
-- Requires Paseo 0.8 or newer.
+- Requires Paseo 0.14 or newer.
 
 What it runs: on the daemon host, in the workspace directory, it runs `git` to read the current branch and origin URL, `gt` to read the stack, and `gh api graphql` once per submitted pull request. These commands receive a copy of the daemon's environment.
 
