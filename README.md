@@ -5,6 +5,9 @@
 [![Paseo](https://img.shields.io/badge/Paseo-%E2%89%A5%200.14.0-8A63D2?style=for-the-badge)](https://paseo.sh)
 [![License](https://img.shields.io/github/license/tomgrin10/paseo-graphite?style=for-the-badge&color=2563eb)](LICENSE)
 
+> [!NOTE]
+> This plugin is archived and no longer maintained. Existing installs keep working, but it will not get updates and is no longer listed in the Paseo plugin directory.
+
 See each workspace's real Graphite stack and which PRs need action, are ready to merge, are waiting, or are done.
 
 ![Graphite inbox with sample pull requests](docs/screenshots/graphite-prs.png)
@@ -44,15 +47,3 @@ paseo plugin reload paseo-graphite   # after changes
 ## License
 
 [MIT](LICENSE) © 2026 Tom Gringauz.
-
-## Other plugins
-
-- [Defer](https://github.com/tomgrin10/paseo-defer) — Schedule messages for later delivery.
-- [Follow-up](https://github.com/tomgrin10/paseo-follow-up) — Track workspace PRs, remaining tasks and completion.
-- [Send to Paseo](https://github.com/tomgrin10/send-to-paseo) — Send GitHub and Graphite PRs to Paseo from Chrome.
-- [Session Guard](https://github.com/tomgrin10/paseo-session-guard) — Pause at session limits and continue after reset.
-- [Smart Session](https://github.com/tomgrin10/paseo-smart-session) — Context compaction and usage insights.
-- [Transcript Search](https://github.com/tomgrin10/paseo-transcript-search) — Search conversations across connected hosts.
-- [Transfer](https://github.com/tomgrin10/paseo-transfer) — Copy or move workspaces between hosts.
-- [Vitals](https://github.com/tomgrin10/paseo-vitals) — Host, process, agent and Docker monitoring.
-- [Workspace Switcher](https://github.com/tomgrin10/paseo-switcher) — Arc-style Ctrl+Tab between recent workspaces.
