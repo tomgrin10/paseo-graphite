@@ -1,5 +1,6 @@
 {
   "id": "paseo-graphite",
+  "icon": "assets/icon.png",
   "requirements": {
     "paseo": ">=0.14.0"
   }

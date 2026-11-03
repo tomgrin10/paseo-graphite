@@ -5,88 +5,54 @@
 [![Paseo](https://img.shields.io/badge/Paseo-%E2%89%A5%200.14.0-8A63D2?style=for-the-badge)](https://paseo.sh)
 [![License](https://img.shields.io/github/license/tomgrin10/paseo-graphite?style=for-the-badge&color=2563eb)](LICENSE)
 
-A trusted local Paseo plugin that shows the real Graphite stack for each workspace and tells you
-whether a PR needs action, is ready to merge, is waiting, or is done.
-
-The stack comes from the Graphite CLI in the workspace. GitHub only enriches those Graphite branches
-with reviews, unresolved threads, checks, and mergeability. The plugin does not infer Graphite
-membership from GitHub PR base branches.
-
-## Install
-
-Install from npm using the latest Paseo release:
-
-```sh
-paseo plugin install paseo-graphite
-```
+See each workspace's real Graphite stack and which PRs need action, are ready to merge, are waiting, or are done.
 
 ![Graphite inbox with sample pull requests](docs/screenshots/graphite-prs.png)
 
 Screenshots use synthetic data.
 
-## Requirements
+## Install
 
-- The latest Paseo release
-- `git`
-- Graphite CLI (`gt`) initialized in the repository
-- authenticated GitHub CLI (`gh`) for live PR status
+```sh
+paseo plugin install paseo-graphite
+```
+
+Needs `git`, the Graphite CLI (`gt`) initialized in the repository, and an authenticated GitHub CLI (`gh`) for live PR status.
 
 ## Use
 
-- Open **Graphite PRs** from Paseo's left sidebar or Command Center for an inbox across active
-  workspaces, grouped into needs-attention, approved, waiting, and completed sections.
-- Press the `Stack N` / `Stack N · Fix M` workspace header button.
-- Press the matching composer pill beside Tasks and Subagents.
-- Run `/pr-stack` in an agent composer to open the Explorer panel.
-- Press **Fix All** to create a separate agent in the workspace using the latest agent's provider
-  configuration. If review feedback is present, its prompt starts with your existing `/fix-pr`
-  workflow. The plugin does not register or intercept `/fix-pr`.
+- **Graphite PRs** in the sidebar or Command Center is an inbox across active workspaces, grouped into needs attention, approved, waiting and completed.
+- The `Stack N · Fix M` header button, the composer pill and `/pr-stack` open the stack for the current workspace. Each PR is one compact row with its action state, resolved review threads and checks.
+- **Fix All** starts a separate agent in the workspace with the latest agent's provider settings. When there is review feedback, its prompt starts with your own `/fix-pr` workflow.
+- Agents can read their own stack, review blockers and checks with `graphite_workspace_stack`. They cannot submit, merge or change PRs.
 
-The workspace panel is intentionally dense: each PR is a compact row with action state,
-`resolved/total` review-thread count, check count, and a small Graphite link. GitHub links and
-comment bodies are omitted.
+Header and composer buttons can be hidden in **Settings → Plugins → Graphite**.
+
+## How it works
+
+The stack comes from the Graphite CLI in the workspace. GitHub only adds reviews, unresolved threads, checks and mergeability to those branches; the plugin never guesses stack membership from PR base branches. See [PLAN.md](PLAN.md) for the product model.
 
 ## Development
 
 ```sh
-npm install
+npm ci
 npm run verify
-paseo plugin install "$PWD"
-paseo plugin reload paseo-graphite
-paseo plugin logs paseo-graphite
+paseo plugin install .
+paseo plugin reload paseo-graphite   # after changes
 ```
-
-See [PLAN.md](PLAN.md) for the product model and roadmap.
 
 ## License
 
 [MIT](LICENSE) © 2026 Tom Gringauz.
 
-## Navigation and display
-
-Open this plugin from Command-K or its sidebar entry. **Overview** and **Display settings** link the main view and settings directly, without opening the Plugins settings page. Hiding a sidebar entry keeps Command-K available.
-
-Display settings can also hide this plugin's workspace header or composer buttons independently. Hidden buttons stay hidden for newly opened workspaces; restoring them retains the latest button status.
-
-## Paseo 0.14 agent integration
-
-`graphite_workspace_stack` reads the calling agent’s workspace stack, review blockers and checks. It cannot submit, merge or modify a PR.
-
-Requires Paseo **0.14.0 or newer**. Agent tools are scoped to interactive Claude
-and Codex sessions; history-only opens receive none. They become available on
-the next idle session open after install or reload. The agent label
-`plugin-tools/enabled: "false"` opts a session out. Existing plugin data and
-settings are retained.
-
 ## Other plugins
 
 - [Defer](https://github.com/tomgrin10/paseo-defer) — Schedule messages for later delivery.
-- [Smart Session](https://github.com/tomgrin10/paseo-smart-session) — Context compaction and usage insights.
-- [Vitals](https://github.com/tomgrin10/paseo-vitals) — Host, agent, and Docker health.
-- [Session Guard](https://github.com/tomgrin10/paseo-session-guard) — Pause at session limits and continue after reset.
-- [Transfer](https://github.com/tomgrin10/paseo-transfer) — Copy or move workspaces between hosts.
-- [Transcript Search](https://github.com/tomgrin10/paseo-transcript-search) — Search conversations across connected hosts.
-- [Send to Paseo](https://github.com/tomgrin10/send-to-paseo) — Send GitHub and Graphite PRs to Paseo from Chrome.
-- [Dispatch](https://github.com/tomgrin10/paseo-dispatch) — Route tasks to existing workspaces (development preview).
-
 - [Follow-up](https://github.com/tomgrin10/paseo-follow-up) — Track workspace PRs, remaining tasks and completion.
+- [Send to Paseo](https://github.com/tomgrin10/send-to-paseo) — Send GitHub and Graphite PRs to Paseo from Chrome.
+- [Session Guard](https://github.com/tomgrin10/paseo-session-guard) — Pause at session limits and continue after reset.
+- [Smart Session](https://github.com/tomgrin10/paseo-smart-session) — Context compaction and usage insights.
+- [Transcript Search](https://github.com/tomgrin10/paseo-transcript-search) — Search conversations across connected hosts.
+- [Transfer](https://github.com/tomgrin10/paseo-transfer) — Copy or move workspaces between hosts.
+- [Vitals](https://github.com/tomgrin10/paseo-vitals) — Host, process, agent and Docker monitoring.
+- [Workspace Switcher](https://github.com/tomgrin10/paseo-switcher) — Arc-style Ctrl+Tab between recent workspaces.
